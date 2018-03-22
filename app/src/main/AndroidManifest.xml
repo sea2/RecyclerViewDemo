@@ -26,6 +26,11 @@
         <activity android:name=".EmptyViewUseActivity" />
         <activity android:name=".ItemDragAndSwipeUseActivity" />
         <activity android:name=".ExpandableUseActivity" />
+        <activity android:name="com.chad.baserecyclerviewadapterhelper.recyclerview.stick.MainActivity" />
+        <activity android:name="com.chad.baserecyclerviewadapterhelper.recyclerview.RecyclerViewHomeActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light"
+            />
+        <activity android:name="com.chad.baserecyclerviewadapterhelper.recyclerview.StaggeredGridLayoutActivity" />
         <activity android:name=".DataBindingUseActivity" />
         <activity android:name=".ItemClickActivity"></activity>
         <activity android:name=".base.BaseActivity"></activity>
