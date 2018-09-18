@@ -1,24 +1,27 @@
 /*
-******************************* Copyright (c)*********************************\
-**
-**                 (c) Copyright 2015, Allen, china, shanghai
-**                          All Rights Reserved
-**
-**                          
-**                         
-**-----------------------------------版本信息------------------------------------
-** 版    本: V0.1
-**
-**------------------------------------------------------------------------------
-********************************End of Head************************************\
-*/
+ ******************************* Copyright (c)*********************************\
+ **
+ **                 (c) Copyright 2015, Allen, china, shanghai
+ **                          All Rights Reserved
+ **
+ **
+ **
+ **-----------------------------------版本信息------------------------------------
+ ** 版    本: V0.1
+ **
+ **------------------------------------------------------------------------------
+ ********************************End of Head************************************\
+ */
 package com.chad.baserecyclerviewadapterhelper;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.chad.baserecyclerviewadapterhelper.util.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * 文 件 名: MyApplication
@@ -31,9 +34,8 @@ import com.orhanobut.logger.Logger;
 public class MyApplication extends Application {
     private static MyApplication appContext;
 
-    public static MyApplication getInstance() {
-        return appContext;
-    }
+    private RefWatcher refWatcher;
+
 
     @Override
     public void onCreate() {
@@ -42,8 +44,22 @@ public class MyApplication extends Application {
         Utils.init(this);
         if (BuildConfig.DEBUG) {
             Logger.addLogAdapter(new AndroidLogAdapter());
-
-
         }
+
+        refWatcher =setupLeakCanary();
     }
+
+    private RefWatcher setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        MyApplication leakApplication = (MyApplication) context.getApplicationContext();
+        return leakApplication.refWatcher;
+    }
+
+
 }
