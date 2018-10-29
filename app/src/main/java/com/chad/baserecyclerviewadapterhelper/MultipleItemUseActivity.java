@@ -1,11 +1,8 @@
 package com.chad.baserecyclerviewadapterhelper;
 
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.chad.baserecyclerviewadapterhelper.adapter.MultipleItemQuickAdapter;
 import com.chad.baserecyclerviewadapterhelper.base.BaseActivity;
@@ -33,6 +30,7 @@ public class MultipleItemUseActivity extends BaseActivity {
         final MultipleItemQuickAdapter multipleItemAdapter = new MultipleItemQuickAdapter(this, data);
         final GridLayoutManager manager = new GridLayoutManager(this, 4);
         mRecyclerView.setLayoutManager(manager);
+        //设置一行加载布局个数
         multipleItemAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
             @Override
             public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
